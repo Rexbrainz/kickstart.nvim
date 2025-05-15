@@ -51,4 +51,22 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+-- NOTE: Personal keymaps
+local map = vim.keymap.set
+map('n', '<space>n', '<cmd>Neotree toggle<cmd>', { desc = 'Open/close neotree' })
+map('n', '<leader>x', '<cmd>bdelete<CR>', { desc = 'Close buffer' })
+vim.keymap.set('n', '<Tab>', ':bnext<CR>', { desc = 'Next buffer' })
+vim.keymap.set('n', '<S-Tab>', ':bprevious<CR>', { desc = 'Prev buffer' })
+
+-- this remaps [count]g to G, but leaves normal g untouched
+
+vim.keymap.set('n', 'g', function()
+  local count = vim.v.count
+  if count > 0 then
+    return 'G'
+  else
+    return 'g'
+  end
+end, { expr = true, noremap = true })
+
 -- vim: ts=2 sts=2 sw=2 et
